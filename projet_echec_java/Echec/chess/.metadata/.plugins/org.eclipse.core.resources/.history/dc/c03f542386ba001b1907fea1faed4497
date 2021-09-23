@@ -1,0 +1,5 @@
+package echec;
+
+public abstract class Pieces {
+
+}

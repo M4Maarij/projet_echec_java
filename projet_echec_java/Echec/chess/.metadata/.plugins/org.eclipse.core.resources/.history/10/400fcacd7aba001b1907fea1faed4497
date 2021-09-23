@@ -1,0 +1,12 @@
+package echec;
+
+public class Test {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		Joueur j = new Joueur("maarij");
+		System.out.println(j);	
+		}
+
+}

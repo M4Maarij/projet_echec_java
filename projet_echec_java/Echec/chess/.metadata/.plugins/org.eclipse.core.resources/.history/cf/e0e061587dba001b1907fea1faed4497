@@ -1,0 +1,19 @@
+package echec;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Partie {
+	
+	private Joueur joueurActuel;
+	private int numTour=1;
+	ArrayList <Joueur> listeJoueurs = new ArrayList <Joueur> ();
+	Plateau plateau;
+	private Scanner entree = new Scanner(System.in);
+
+	boolean fini;
+	
+	
+	
+	}
+}
+

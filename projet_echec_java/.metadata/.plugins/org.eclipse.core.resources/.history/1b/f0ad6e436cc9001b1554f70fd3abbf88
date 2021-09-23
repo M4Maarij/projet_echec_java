@@ -1,0 +1,55 @@
+package Echec;
+import java.util.*;
+
+/*
+ * Un Cavalier EST une Piece qui peux changer 
+ *de place alors il a la possibilité d'effectuer un mouvement.
+ *il peut se déplacer de deux cases verticalement et d'une case
+ * horizontalement, ou de deux cases horizontalement et d'une case 
+ * verticalement (les deux formant la forme d'un L).
+ *  De cette façon, un chevalier peut avoir un maximum de 8 mouvements.
+ */
+
+
+public class Cavalier  extends Piece implements Mouvement {
+
+	public Cavalier(int x, int y, Couleur c) {
+		super(x, y, c);  		// demander le constructeur père à remplir le Cavalier 
+								//par (Sa position définie par X et Y et donner la couleur de Cette Piece.
+		
+	}
+	
+	@Override
+	public List<Position> getMouvementPossible() {
+		// TODO Auto-generated method stub
+		
+		int x=position.getX();  // X actuel
+		int y=position.getY();  // Y actuel
+		Position temp=new Position(x,y);   // Creer un objet position pour cette position X,Y
+		List<Position> mouvementPossible = new ArrayList<Position>(); // Tableau des positions à retourner en fin
+		
+		
+		for(int px=-2;px<=2;px++)  // X de -2 ->  -1 -> 0 -> 1 -> 2, le '0' represente la Piece, Centre
+		{
+			for(int py=-2;py<=2;py++)
+			{
+				
+				if(Math.abs(px)+Math.abs(py)==3)
+				{
+					temp.setPosition(x+px, y+py);
+					if(temp.inBounds()&& !this.bloqueAmi(temp)) // pas d'ami sur les cases
+					{
+						mouvementPossible.add(temp.clone());
+					}
+				}
+			}
+		}
+		return mouvementPossible;
+	}
+
+	@Override
+	public String toString() {
+		return "[cheval "+super.position.getX()+","+super.position.getY()+"]" ;
+	}
+
+}

@@ -1,0 +1,115 @@
+package Echec;
+
+import java.util.*;
+
+
+/*
+* Le fou est considéré, à juste titre, comme une arme à longue portée.
+* En effet, il ne se déplace qu’en diagonale mais a le privilège de se pouvoir 
+* se déplacer d’une ou de plusieurs cases, vers l’avant ou l’arrière. 
+* A noter qu’il ne peut se déplacer que sur une seule couleur,
+*  c'est-à-dire la couleur de sa case initiale.
+*/
+
+// Fou est une Piece qui peut effectuer un Mouvement
+public class Fou extends Piece implements Mouvement{
+
+	public Fou(int x, int y, Couleur c) {
+		super(x, y, c); // Constructeur de la classe Père, sur la position (x,y), avec  la couleur
+		
+	}
+	public Fou(int x, int y) {
+		super(x, y);  // Constructeur de la classe Père, sur la position (x,y), sans  la couleur
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+	@Override
+	public
+	List<Position> getMouvementPossible() {  //renvoi les cases de dplacement du fou
+		//mouvementPossible.clear();
+		int x=position.getX();
+		int y=position.getY();
+		Position temp=new Position(x,y);
+		List<Position> mouvementPossible = new ArrayList<Position>();
+		
+		
+		/*8 cases max par diagonale
+		optimisation possible  ce niveau si out of bound
+		valable pour les 2 couleurs*/
+		
+			for(int c=1;c<8;c++)				//diagonale haut droite
+			{
+				temp.setX(x+c);
+				temp.setY(y+c);				
+				if (temp.inBounds() && !this.bloqueAmi(temp))	//si un alli dans la ligne s'arrete
+				{
+					mouvementPossible.add(temp.clone());
+					if (this.bloqueEnnemi(temp))		//si la case a un ennemi les suivantes pas possibles
+						break;
+				}
+				else
+					break;					// si ami bloque case prend fin
+			
+			}
+			for(int c=1;c<8;c++)				//diagonale haut gauche
+			{
+				temp.setX(x-c);
+				temp.setY(y+c);
+				if (temp.inBounds() && !this.bloqueAmi(temp))	//si un alli dans la ligne s'arrete
+				{
+					mouvementPossible.add(temp.clone());
+					if (this.bloqueEnnemi(temp))		//si la case a un ennemi les suivantes pas possibles
+						break;
+				}
+				else
+					break;					// si ami bloque case prend fin
+			
+			}
+			for(int c=1;c<8;c++)				//diagonale bas gauche
+			{
+				temp.setX(x-c);
+				temp.setY(y-c);
+				if (temp.inBounds() && !this.bloqueAmi(temp))	//si un alli dans la ligne s'arrete
+				{
+					mouvementPossible.add(temp.clone());
+					if (this.bloqueEnnemi(temp))		//si la case a un ennemi les suivantes pas possibles
+						break;
+				}
+				else
+					break;					// si ami bloque case prend fin
+			
+			}
+			for(int c=1;c<8;c++)				//diagonale bas droite
+			{
+				temp.setX(x+c);
+				temp.setY(y-c);
+				if (temp.inBounds() && !this.bloqueAmi(temp))	//si un alli dans la ligne s'arrete
+				{
+					mouvementPossible.add(temp.clone());
+					if (this.bloqueEnnemi(temp))		//si la case a un ennemi les suivantes pas possibles
+						break;
+				}
+				else
+					break;					// si ami bloque case prend fin
+			
+			}
+			
+			
+		// rajouter regle 1er mouv
+		
+		return mouvementPossible;
+	}
+	
+	
+
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "[fou "+super.position.getX()+","+super.position.getY()+"]" ;
+	}
+	
+	
+
+}
